@@ -7,22 +7,20 @@ package ca.sheridancollege.project;
 
 public class PokerCard extends Card {
 
-  private Ranks rank;
-  private Suits suit;
+  private String rank;
+  private String suit;
 
-  public PokerCard(Ranks rank, Suits suit) {
+  public PokerCard(String rank, String suit) {
     super(rank, suit);
     this.rank = rank;
     this.suit = suit;
   }
 
-  @Override
-  public Ranks getRank() {
+  public String getRank() {
     return rank;
   }
 
-  @Override
-  public Suits getSuit() {
+  public String getSuit() {
     return suit;
   }
 

@@ -78,7 +78,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasRoyalFlush() {
-    Map<Card.Ranks, Integer> rankCounts = getRankCounts();
+    Map<String, Integer> rankCounts = getRankCounts();
     boolean hasAce = rankCounts.containsKey("Ace");
     boolean hasKing = rankCounts.containsKey("King");
     boolean hasQueen = rankCounts.containsKey("Queen");
@@ -94,7 +94,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasFourOfAKind() {
-    Map<Card.Ranks, Integer> rankCounts = getRankCounts();
+    Map<String, Integer> rankCounts = getRankCounts();
     for (int count : rankCounts.values()) {
       if (count == 4) {
         return true;
@@ -104,7 +104,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasFullHouse() {
-    Map<Card.Ranks, Integer> rankCounts = getRankCounts();
+    Map<String, Integer> rankCounts = getRankCounts();
     boolean hasThreeOfAKind = false;
     boolean hasPair = false;
     for (int count : rankCounts.values()) {
@@ -132,7 +132,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasThreeOfAKind() {
-    Map<Card.Ranks, Integer> rankCounts = getRankCounts();
+    Map<String, Integer> rankCounts = getRankCounts();
     for (int count : rankCounts.values()) {
       if (count == 3) {
         return true;
@@ -142,7 +142,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasTwoPair() {
-    Map<Card.Ranks, Integer> rankCounts = getRankCounts();
+    Map<String, Integer> rankCounts = getRankCounts();
     int pairCount = 0;
     for (int count : rankCounts.values()) {
       if (count == 2) {
@@ -153,7 +153,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasOnePair() {
-    Map<Card.Ranks, Integer> rankCounts = getRankCounts();
+    Map<String, Integer> rankCounts = getRankCounts();
     for (int count : rankCounts.values()) {
       if (count == 2) {
         return true;
@@ -163,7 +163,7 @@ public class PokerPlayer extends Player {
   }
 
   private boolean hasSameSuit() {
-    Card.Suits suit = hand.get(0).getSuit();
+    String suit = hand.get(0).getSuit();
     for (Card card : hand) {
       if (!card.getSuit().equals(suit)) {
         return false;
@@ -172,10 +172,10 @@ public class PokerPlayer extends Player {
     return true;
   }
 
-  private Map<Card.Ranks, Integer> getRankCounts() {
-    Map<Card.Ranks, Integer> rankCounts = new HashMap<>();
+  private Map<String, Integer> getRankCounts() {
+    Map<String, Integer> rankCounts = new HashMap<>();
     for (Card card : hand) {
-      Card.Ranks rank = ((PokerCard) card).getRank();
+      String rank = ((PokerCard) card).getRank();
       rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
     }
     return rankCounts;
@@ -184,15 +184,44 @@ public class PokerPlayer extends Player {
   private List<Integer> getSortedRankValues() {
     List<Integer> rankValues = new ArrayList<>();
     for (Card card : hand) {
-      Card.Ranks rank = ((PokerCard) card).getRank();
+      String rank = ((PokerCard) card).getRank();
       rankValues.add(getRankValue(rank));
     }
     Collections.sort(rankValues);
     return rankValues;
   }
 
-  private int getRankValue(Card.Ranks rank) {
-    return Card.Ranks.valueOf(rank.toString()).ordinal();
+  private int getRankValue(String rank) {
+    switch (rank) {
+      case "Ace":
+        return 1;
+      case "2":
+        return 2;
+      case "3":
+        return 3;
+      case "4":
+        return 4;
+      case "5":
+        return 5;
+      case "6":
+        return 6;
+      case "7":
+        return 7;
+      case "8":
+        return 8;
+      case "9":
+        return 9;
+      case "10":
+        return 10;
+      case "Jack":
+        return 11;
+      case "Queen":
+        return 12;
+      case "King":
+        return 13;
+      default:
+        return 0;
+    }
   }
 }
 
