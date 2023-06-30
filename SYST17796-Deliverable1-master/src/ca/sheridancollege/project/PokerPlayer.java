@@ -192,7 +192,7 @@ public class PokerPlayer extends Player {
   }
 
   private int getRankValue(Card.Ranks rank) {
-    return Card.Ranks.valueOf(rank.toString()).ordinal();
+    return 1+Card.Ranks.valueOf(rank.toString()).ordinal();
   }
 }
 
