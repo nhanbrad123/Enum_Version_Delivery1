@@ -9,7 +9,7 @@
 package ca.sheridancollege.project;
 
 public class Card {
-//Added comment
+//Added comment to branch
   public enum Suits
   {
       DIAMONDS,
